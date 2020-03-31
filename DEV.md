@@ -1,0 +1,2 @@
+- stop profiling when process is stopped : search how to check for that with psutil
+- understand how subprocess Popen work to be able to use commands with arguments
