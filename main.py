@@ -1,8 +1,8 @@
 import argparse
-import os
-import time
 import datetime
-import subprocess
+import os
+from subprocess import Popen
+import time
 
 import psutil
 
@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("sh_command")
 args = parser.parse_args()
 
-process_id = subprocess.Popen(args=[args.sh_command]).pid
+process_id = Popen(args=args.sh_command.split()).pid
 print(process_id)
 
 process = psutil.Process(process_id)
@@ -38,7 +38,5 @@ while True:
     )
     with open("log_file.csv", "a") as file:
         file.write(mem_info_line)
-
-    # print(mem_info_line)
 
     time.sleep(1)
