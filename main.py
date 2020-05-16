@@ -19,23 +19,22 @@ if not os.path.exists("log_file.csv"):
     with open("log_file.csv", "w") as file:
         file.write(
             (
-                "timestamp_utc, resident_mememory (MiB), shared_memory (MiB), not_shared_memory (MiB) \n"
+                "timestamp_utc, resident_mememory (MiB), shared_memory (MiB), not_shared_memory (MiB), swap_memory (MiB) \n"
             )
         )
 
 while True:
     timestamp_utc = datetime.datetime.utcnow()
 
-    process_mem_info = process.memory_info()
+    process_mem_info = process.memory_full_info()
 
     # Memory in MiB
     resident_mem = process_mem_info.rss / (2 ** 20)
     shared_mem = process_mem_info.shared / (2 ** 20)
     not_shared_mem = resident_mem - shared_mem
+    swap_mem = process_mem_info.swap / (2 ** 20)
 
-    mem_info_line = (
-        f"{timestamp_utc}, {resident_mem}, {shared_mem}, {not_shared_mem} \n"
-    )
+    mem_info_line = f"{timestamp_utc}, {resident_mem}, {shared_mem}, {not_shared_mem}, {swap_mem} \n"
     with open("log_file.csv", "a") as file:
         file.write(mem_info_line)
 
