@@ -1,1 +1,2 @@
 - stop profiling when process is stopped : search how to check for that with psutil
+- use psutil.Process.oneshot() to potentially speedup information retrieval.
