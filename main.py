@@ -12,9 +12,6 @@ parser.add_argument("sh_command")
 args = parser.parse_args()
 
 process_id = Popen(args=args.sh_command.split()).pid
-print(process_id)
-
-process_id = 10896
 
 process = psutil.Process(process_id)
 
